@@ -23,11 +23,19 @@ jobs:
         login-server: eventosdahoraregistry.azurecr.io
         username: ${{ steps.create-acr.outputs.acr_username }}
         password: ${{ steps.create-acr.outputs.acr_password }}
+        
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+        
+    - name: Build with Maven
+      run: mvn package -Pnative -Dquarkus.native.container-build=true
 
     - name: Build and push image to ACR
       id: build-image
       run: |
-        docker build -f src/main/docker/Dockerfile.native -t eventosdahoraregistry.azurecr.io/eventosdahoracluster:${{ github.sha }} "$GITHUB_WORKSPACE/target"
+        docker build -f src/main/docker/Dockerfile.native -t eventosdahoraregistry.azurecr.io/eventosdahoracluster:${{ github.sha }} "$GITHUB_WORKSPACE/."
         docker push eventosdahoraregistry.azurecr.io/eventosdahoracluster:${{ github.sha }}
     
     - uses: azure/k8s-set-context@v1
