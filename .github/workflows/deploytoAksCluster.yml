@@ -27,7 +27,7 @@ jobs:
     - name: Build and push image to ACR
       id: build-image
       run: |
-        docker build "$GITHUB_WORKSPACE/target" -f  "src/main/docker/Dockerfile.native" -t eventosdahoraregistry.azurecr.io/eventosdahoracluster:${{ github.sha }}
+        docker build -f "src/main/docker/Dockerfile.native" -t eventosdahoraregistry.azurecr.io/eventosdahoracluster:${{ github.sha }}
         docker push eventosdahoraregistry.azurecr.io/eventosdahoracluster:${{ github.sha }}
     
     - uses: azure/k8s-set-context@v1
