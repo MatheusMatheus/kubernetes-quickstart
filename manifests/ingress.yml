@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: "eventosdahoraakscluster-c875"
+    labels:
+        app: "eventosdahoraakscluster-c875"
+    annotations:
+        kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+    rules:
+        - host: eventosdahoraakscluster2384-eventosdahoraakscluster-c875.9b4fd343dd1a48b9b352.brazilsouth.aksapp.io
+          http:
+            paths:
+            - path: /
+              backend:
+                serviceName: "eventosdahoraakscluster-c875"
+                servicePort: 8080
