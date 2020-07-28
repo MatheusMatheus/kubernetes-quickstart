@@ -17,7 +17,7 @@ jobs:
         java-version: 1.8
         
     - name: Build with Maven
-      run: mvn package -Pnative -Dquarkus.native.container-build=true
+      run: ./mvnw package -Pnative -Dquarkus.native.container-build=true
        
     - name: Build and push image to ACR
       id: build-image
@@ -50,7 +50,7 @@ jobs:
       with:
         namespace: eventosdahoraakscluster2384
         manifests: |
-          target/kubernetes/kubernetes.yml"
+          target/kubernetes/kubernetes.yml
         images: |
           eventosdahoraacr.azurecr.io/eventosdahoraakscluster:${{ github.sha }}
         imagepullsecrets: |
