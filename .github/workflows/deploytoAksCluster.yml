@@ -50,9 +50,7 @@ jobs:
       with:
         namespace: eventosdahoraakscluster2384
         manifests: |
-          manifests/deployment-1.yml
-          manifests/service-1.yml
-          manifests/ingress.yml
+         "$GITHUB_WORKSPACE"/target/kubernetes/kubernetes.yml
         images: |
           eventosdahoraacr.azurecr.io/eventosdahoraakscluster:${{ github.sha }}
         imagepullsecrets: |
